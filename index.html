@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Page Title</title>
+</head>
+
+<body>
+  <script>
+    let humanScore = 0;
+    let computerScore = 0;
+
+    function getHumanChoice() {
+      let userInput = prompt('Rock, paper, or scissors?');
+      return userInput.toLowerCase(); // gets human input, makes it case insensitive
+    }
+
+    function getComputerChoice() {
+      const choices = ['rock', 'paper', 'scissors'];
+      let randomChoice = choices[Math.floor(Math.random() * 3)];
+      return randomChoice; // random generator
+    }
+
+
+    function playRound(humanOption, computerOption) {
+      if (humanOption === computerOption) {
+        console.log(`It\'s a tie! The computer chose ${computerOption}.`);
+      }
+      else if (humanOption == 'rock' && computerOption == 'scissors' || humanOption == 'scissors' && computerOption == 'paper' || humanOption == 'paper' && computerOption == 'rock') {
+        console.log(`You have won! The computer chose ${computerOption}. ${humanOption} beats ${computerOption}.`);
+        ++humanScore;
+      }
+      else if (humanOption == 'scissors' && computerOption == 'rock' || humanOption == 'paper' && computerOption == 'scissors' || humanOption == 'rock' && computerOption == 'paper') {
+        console.log(`You have lost! The computer chose ${computerOption}. ${computerOption} beats ${humanOption}.`);
+        ++computerScore;
+      }
+      else {
+        console.log('You have entered an invalid response. Please refresh the page and enter either: rock, paper, scissors');
+        return;
+      }
+      console.log(`The score is now ${humanScore} to ${computerScore}.`)
+    }
+
+    function playGame() {
+      for (let i = 0; i < 5; i++) {
+        const humanChoice = getHumanChoice();
+        const computerChoice = getComputerChoice();
+        playRound(humanChoice, computerChoice);
+      }
+    }
+
+    function logFinalResult(humanScore, computerScore) {
+      if (humanScore > computerScore) {
+        console.log('Congrats! You have won.')
+      }
+      else if (computerScore > humanScore) {
+        console.log('You have lost. Better luck next time!')
+      }
+      else {
+        console.log('It\'s a tie!')
+      }
+    }
+
+    playGame();
+    logFinalResult(humanScore, computerScore);
+  </script>
+</body>
+
+</html>
